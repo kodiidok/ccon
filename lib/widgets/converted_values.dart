@@ -19,10 +19,25 @@ class ConvertedValues extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 for (var i = 0; i < state.convertedValues.length; i++)
-                  ConvertedValue(
-                      currencyCubit: context
-                          .read<ConvertedValuesCubit>()
-                          .getCurrencyCubit(i)),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: ConvertedValue(
+                          currencyCubit: context
+                              .read<ConvertedValuesCubit>()
+                              .getCurrencyCubit(i),
+                        ),
+                      ),
+                      IconButton(
+                        icon: Icon(Icons.remove_circle),
+                        onPressed: () {
+                          context
+                              .read<ConvertedValuesCubit>()
+                              .removeConvertedValue(i);
+                        },
+                      ),
+                    ],
+                  ),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
                   child: ElevatedButton(
