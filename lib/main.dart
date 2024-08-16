@@ -14,7 +14,7 @@ class CurrencyExchangeApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: BlocProvider(
-        create: (_) => CurrencyExchangeCubit(CurrencyService()),
+        create: (_) => CurrencyCubit(CurrencyService()),
         child: const CurrencyExchangeScreen(),
       ),
       // home: BlocProvider(

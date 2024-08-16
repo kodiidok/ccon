@@ -1,30 +1,25 @@
-import 'package:ccon/blocs/converted_values_cubit.dart';
-import 'package:ccon/blocs/currency_input_cubit.dart';
+import 'package:ccon/blocs/amount_cubit.dart';
+import 'package:ccon/widgets/amount_input.dart';
 import 'package:ccon/widgets/converted_values.dart';
-import 'package:ccon/widgets/currency_input.dart'; // Update path if necessary
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 
 class CurrencyExchangeScreen extends StatelessWidget {
   const CurrencyExchangeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Currency Exchange Screen'),
-      ),
-      body: MultiBlocProvider(
-        providers: [
-          BlocProvider<CurrencyInputCubit>(
-            create: (context) => CurrencyInputCubit(),
-          ),
-          BlocProvider<ConvertedValuesCubit>(
-            create: (context) => ConvertedValuesCubit(),
-          ),
-        ],
-        child: const Padding(
-          padding: EdgeInsets.all(16.0),
+    final controller = TextEditingController();
+
+    return BlocProvider(
+      create: (_) => AmountCubit(),
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Currency Exchange Screen'),
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -36,7 +31,7 @@ class CurrencyExchangeScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 8),
-              CurrencyInputWidget(),
+              AmountInput(controller: controller),
               SizedBox(height: 20),
               Text(
                 'CONVERT TO',
@@ -46,7 +41,7 @@ class CurrencyExchangeScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 8),
-              ConvertedValuesWidget(), // This now uses the Cubit
+              ConvertedValues(), // This now uses the Cubit
             ],
           ),
         ),
