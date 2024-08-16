@@ -6,6 +6,8 @@ CCON is a real-time currency converter that allows users to convert between vari
 
 The app follows the BLoC (Business Logic Component) design pattern with Cubits for state management. This approach separates the business logic from the UI, making the codebase more maintainable and testable. The BLoC pattern helps manage the state efficiently by providing a clear flow of data between the UI and business logic layers. Instead of the event-state-bloc pattern, **Cubits** were used to manage states efficiently using BLoC pattern.
 
+![Slide 16_9 - 1 (1)](https://github.com/user-attachments/assets/41f1ca6a-48e0-42c0-9dd1-c3aa865c009f)
+
 ## Features
 
 1. **Real-Time Currency Converter**: Convert currencies using up-to-date exchange rates.
