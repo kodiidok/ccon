@@ -12,6 +12,7 @@ class CurrencyInputCubit extends Cubit<String> {
 
     // Set a new timer for 1 second
     _debounceTimer = Timer(const Duration(seconds: 1), () {
+      print('Timer fired with input: $input');
       emit(input);
     });
   }

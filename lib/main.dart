@@ -15,14 +15,18 @@ class CurrencyExchangeApp extends StatelessWidget {
     return MaterialApp(
       home: BlocProvider(
         create: (_) => CurrencyExchangeCubit(CurrencyService()),
-        child: const MainScreen(),
+        child: const CurrencyExchangeScreen(),
       ),
-      routes: {
-        '/currency_exchange': (context) => BlocProvider(
-              create: (_) => CurrencyExchangeCubit(CurrencyService()),
-              child: const CurrencyExchangeScreen(),
-            ),
-      },
+      // home: BlocProvider(
+      //   create: (_) => CurrencyExchangeCubit(CurrencyService()),
+      //   child: const MainScreen(),
+      // ),
+      // routes: {
+      //   '/currency_exchange': (context) => BlocProvider(
+      //         create: (_) => CurrencyExchangeCubit(CurrencyService()),
+      //         child: const CurrencyExchangeScreen(),
+      //       ),
+      // },
     );
   }
 }

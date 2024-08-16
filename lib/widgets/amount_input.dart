@@ -10,8 +10,13 @@ class AmountInputWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<CurrencyInputCubit, String>(
       builder: (context, input) {
+        // Set default value if input is empty
+        final displayValue = input.isEmpty ? '0.00' : input;
+
         return TextField(
-          controller: TextEditingController(text: input),
+          // Initialize the TextEditingController with the display value
+          controller: TextEditingController(text: displayValue)
+            ..selection = TextSelection.collapsed(offset: displayValue.length),
           decoration: const InputDecoration(
             border: InputBorder.none, // Remove the border
           ),
@@ -19,6 +24,7 @@ class AmountInputWidget extends StatelessWidget {
             fontSize: 24.0, // Set the desired font size
           ),
           onChanged: (text) {
+            // Ensure the input value is updated in the cubit
             context.read<CurrencyInputCubit>().updateInput(text);
           },
           onSubmitted: (submittedInput) {

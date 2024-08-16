@@ -1,4 +1,5 @@
 import 'package:ccon/blocs/converted_values_cubit.dart';
+import 'package:ccon/blocs/currency_input_cubit.dart';
 import 'package:ccon/widgets/converted_values.dart';
 import 'package:ccon/widgets/currency_input.dart'; // Update path if necessary
 import 'package:flutter/material.dart';
@@ -15,10 +16,12 @@ class CurrencyExchangeScreen extends StatelessWidget {
       ),
       body: MultiBlocProvider(
         providers: [
+          BlocProvider<CurrencyInputCubit>(
+            create: (context) => CurrencyInputCubit(),
+          ),
           BlocProvider<ConvertedValuesCubit>(
             create: (context) => ConvertedValuesCubit(),
           ),
-          // Other providers (like CurrencyInputCubit) can go here
         ],
         child: const Padding(
           padding: EdgeInsets.all(16.0),
