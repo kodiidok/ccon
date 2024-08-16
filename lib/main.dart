@@ -34,6 +34,7 @@ class CurrencyExchangeApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Currency Converter',
         theme: ThemeData(
           brightness: Brightness.dark, // Set the brightness to dark
