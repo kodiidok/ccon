@@ -1,6 +1,6 @@
-import 'package:ccon/blocs/converted_values_cubit.dart';
+import 'package:ccon/blocs/amount_cubit.dart';
+import 'package:ccon/widgets/amount_input.dart';
 import 'package:ccon/widgets/converted_values.dart';
-import 'package:ccon/widgets/currency_input.dart'; // Update path if necessary
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -9,41 +9,42 @@ class CurrencyExchangeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Currency Exchange Screen'),
-      ),
-      body: MultiBlocProvider(
-        providers: [
-          BlocProvider<ConvertedValuesCubit>(
-            create: (context) => ConvertedValuesCubit(),
-          ),
-          // Other providers (like CurrencyInputCubit) can go here
-        ],
-        child: const Padding(
-          padding: EdgeInsets.all(16.0),
+    final controller = TextEditingController();
+
+    return BlocProvider(
+      create: (_) => AmountCubit(),
+      child: Scaffold(
+        appBar: AppBar(
+          title:
+              const Text('Advanced Exchanger', style: TextStyle(fontSize: 16)),
+          centerTitle: true,
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'INSERT AMOUNT',
+              const Text(
+                'INSERT AMOUNT:',
                 style: TextStyle(
                   fontSize: 16,
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
-              SizedBox(height: 8),
-              CurrencyInputWidget(),
-              SizedBox(height: 20),
-              Text(
-                'CONVERT TO',
+              const SizedBox(height: 8),
+              AmountInput(controller: controller),
+              const SizedBox(height: 20),
+              const Text(
+                'CONVERT TO:',
                 style: TextStyle(
                   fontSize: 16,
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
-              SizedBox(height: 8),
-              ConvertedValuesWidget(), // This now uses the Cubit
+              const SizedBox(height: 8),
+              const Expanded(
+                child: ConvertedValues(), // This will fill remaining space
+              ),
             ],
           ),
         ),
