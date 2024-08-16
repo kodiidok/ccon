@@ -35,18 +35,19 @@
 import 'package:ccon/screens/currency_exchange_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:provider/provider.dart'; // Import provider package
+import 'package:provider/provider.dart';
 import 'package:ccon/services/currency_service.dart';
 import 'package:ccon/blocs/currency_cubit.dart';
 import 'package:ccon/blocs/global_currency_cubit.dart';
 import 'package:ccon/blocs/amount_cubit.dart';
-import 'package:ccon/widgets/converted_value.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
