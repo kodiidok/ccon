@@ -11,47 +11,44 @@ class ConvertedValue extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<AmountCubit, AmountState>(
       builder: (context, amountState) {
+        // Default amount display
+        String amountText = 'Amount: 0.00';
+
+        if (amountState is AmountUpdated) {
+          // Use the updated amount from the state
+          amountText = 'Amount: ${amountState.amount}';
+        }
+
         return BlocBuilder<CurrencyCubit, CurrencyState>(
           builder: (context, currencyState) {
-            String amountText = 'Amount: ';
+            // Default currency display
+            String selectedCurrency = 'USD';
 
-            // Handle AmountState
-            if (amountState is AmountUpdated) {
-              // Use the amount provided by the state or default to '0.00'
-              String amount =
-                  amountState.amount.isNotEmpty ? amountState.amount : '0.00';
-              amountText += amount;
-            } else if (amountState is AmountInitial) {
-              amountText += '0.00'; // Default amount
+            if (currencyState is CurrencyLoaded) {
+              selectedCurrency = currencyState.selectedCurrency ?? 'USD';
             }
-
-            // Handle CurrencyState
-            String initialCurrency = currencyState is CurrencyLoaded
-                ? currencyState.selectedCurrency ?? ''
-                : '';
 
             return Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Expanded(
                   child: Text(
-                    amountText,
+                    '$amountText $selectedCurrency',
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
-                SizedBox(
-                    width: 16), // Spacing between amount and currency selector
+                SizedBox(width: 16), // Spacing between amount and currency selector
                 Expanded(
                   child: CurrencySelector(
-                    initialCurrency: initialCurrency,
-                    onCurrencyChanged: (selectedCurrency) {
+                    initialCurrency: selectedCurrency,
+                    onCurrencyChanged: (newCurrency) {
                       // Handle currency change
                       context
                           .read<CurrencyCubit>()
-                          .selectCurrency(selectedCurrency);
+                          .selectCurrency(newCurrency);
                     },
                   ),
                 ),

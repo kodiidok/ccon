@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ccon/blocs/currency_cubit.dart';
+import 'package:ccon/blocs/amount_cubit.dart';
+import 'package:ccon/blocs/currency_cubit.dart'; // Import the CurrencyCubit
 import 'currency_selector.dart'; // Import the CurrencySelector widget
 import 'package:ccon/services/currency_service.dart'; // Import the CurrencyService
 
@@ -28,7 +29,8 @@ class AmountInput extends StatelessWidget {
               labelText: hintText,
             ),
             onChanged: (value) {
-              // Handle amount change logic here
+              // Update the AmountCubit with the new amount
+              context.read<AmountCubit>().updateAmount(value);
             },
           ),
         ),
