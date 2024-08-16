@@ -7,10 +7,10 @@ class CurrencySelector extends StatelessWidget {
   final Function(String) onCurrencyChanged;
 
   const CurrencySelector({
-    Key? key,
+    super.key,
     required this.initialCurrency,
     required this.onCurrencyChanged,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +29,7 @@ class CurrencySelector extends StatelessWidget {
                 onCurrencyChanged(newCurrency);
               }
             },
+            underline: Container(),
             items: currencies.map<DropdownMenuItem<String>>((String currency) {
               return DropdownMenuItem<String>(
                 value: currency,
@@ -39,7 +40,7 @@ class CurrencySelector extends StatelessWidget {
         } else if (currencyState is CurrencyError) {
           return Text('Error: ${currencyState.message}');
         } else {
-          return Text('Loading...');
+          return const Text('Loading...');
         }
       },
     );

@@ -15,32 +15,34 @@ class CurrencyExchangeScreen extends StatelessWidget {
       create: (_) => AmountCubit(),
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Currency Exchange Screen'),
+          title:
+              const Text('Advanced Exchanger', style: TextStyle(fontSize: 16)),
+          centerTitle: true,
         ),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'INSERT AMOUNT',
+              const Text(
+                'INSERT AMOUNT:',
                 style: TextStyle(
                   fontSize: 16,
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
               AmountInput(controller: controller),
-              SizedBox(height: 20),
-              Text(
-                'CONVERT TO',
+              const SizedBox(height: 20),
+              const Text(
+                'CONVERT TO:',
                 style: TextStyle(
                   fontSize: 16,
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
-              SizedBox(height: 8),
-              Expanded(
+              const SizedBox(height: 8),
+              const Expanded(
                 child: ConvertedValues(), // This will fill remaining space
               ),
             ],
