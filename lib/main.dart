@@ -1,4 +1,4 @@
-import 'package:ccon/blocs/currency/currency_cubit.dart';
+import 'package:ccon/blocs/currency_cubit.dart';
 import 'package:ccon/screens/currency_exchange_screen.dart';
 import 'package:ccon/screens/main_screen.dart';
 import 'package:ccon/services/currency_service.dart';

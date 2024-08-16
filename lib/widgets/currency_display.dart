@@ -1,4 +1,4 @@
-import 'package:ccon/blocs/currency/currency_cubit.dart';
+import 'package:ccon/blocs/currency_cubit.dart';
 import 'package:ccon/widgets/currency_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

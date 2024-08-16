@@ -1,6 +1,6 @@
+import 'package:ccon/blocs/currency_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../blocs/currency/currency_cubit.dart';
 
 class CurrencySelectorWidget extends StatelessWidget {
   const CurrencySelectorWidget({super.key});
@@ -24,6 +24,9 @@ class CurrencySelectorWidget extends StatelessWidget {
               child: Text(currency),
             );
           }).toList(),
+          isExpanded: false, // Ensure it fits content width
+          elevation: 0, // Remove elevation for a flat dropdown
+          underline: const SizedBox.shrink(), // Remove the underline
         );
       },
     );
