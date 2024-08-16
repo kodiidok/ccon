@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ccon/blocs/currency_cubit.dart';
 import 'package:ccon/blocs/amount_cubit.dart';
+import 'currency_selector.dart'; // Import the CurrencySelector widget
 
 class ConvertedValue extends StatelessWidget {
   const ConvertedValue({super.key});
@@ -13,7 +14,6 @@ class ConvertedValue extends StatelessWidget {
         return BlocBuilder<CurrencyCubit, CurrencyState>(
           builder: (context, currencyState) {
             String amountText = 'Amount: ';
-            String currencyText = 'Currency: ';
 
             // Handle AmountState
             if (amountState is AmountUpdated) {
@@ -26,17 +26,9 @@ class ConvertedValue extends StatelessWidget {
             }
 
             // Handle CurrencyState
-            if (currencyState is CurrencyLoaded) {
-              final selectedCurrency = currencyState.selectedCurrency;
-              currencyText += selectedCurrency != null
-                  ? selectedCurrency
-                  : 'No currency selected';
-            } else if (currencyState is CurrencyError) {
-              currencyText += 'Error: ${currencyState.message}';
-            } else {
-              currencyText +=
-                  'No currency loaded'; // Fallback for initial state
-            }
+            String initialCurrency = currencyState is CurrencyLoaded
+                ? currencyState.selectedCurrency ?? ''
+                : '';
 
             return Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -50,14 +42,17 @@ class ConvertedValue extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(width: 16), // Spacing between amount and currency
+                SizedBox(
+                    width: 16), // Spacing between amount and currency selector
                 Expanded(
-                  child: Text(
-                    currencyText,
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  child: CurrencySelector(
+                    initialCurrency: initialCurrency,
+                    onCurrencyChanged: (selectedCurrency) {
+                      // Handle currency change
+                      context
+                          .read<CurrencyCubit>()
+                          .selectCurrency(selectedCurrency);
+                    },
                   ),
                 ),
               ],

@@ -11,19 +11,6 @@ class ConvertedValues extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ConvertedValue(),
-          // // Example content
-          // Container(
-          //   height: 200, // Example fixed height, adjust as needed
-          //   color: Colors.red,
-          //   child: Center(child: Text('Some content')),
-          // ),
-          // SizedBox(height: 16),
-          // Container(
-          //   height: 200, // Example fixed height, adjust as needed
-          //   color: Colors.blue,
-          //   child: Center(child: Text('Some more content')),
-          // ),
-          // Add more widgets as needed
         ],
       ),
     );
