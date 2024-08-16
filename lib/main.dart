@@ -1,4 +1,4 @@
-import 'package:ccon/blocs/currency_cubit.dart';
+import 'package:ccon/blocs/global_currency_cubit.dart';
 import 'package:ccon/screens/currency_exchange_screen.dart';
 import 'package:ccon/screens/main_screen.dart';
 import 'package:ccon/services/currency_service.dart';
@@ -14,7 +14,7 @@ class CurrencyExchangeApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: BlocProvider(
-        create: (_) => CurrencyCubit(CurrencyService()),
+        create: (_) => GlobalCurrencyCubit(CurrencyService()),
         child: const CurrencyExchangeScreen(),
       ),
       // home: BlocProvider(

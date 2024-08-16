@@ -1,8 +1,8 @@
+import 'package:ccon/widgets/global_currency_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ccon/blocs/amount_cubit.dart';
 import 'package:ccon/blocs/currency_cubit.dart'; // Import the CurrencyCubit
-import 'currency_selector.dart'; // Import the CurrencySelector widget
 import 'package:ccon/services/currency_service.dart'; // Import the CurrencyService
 
 class AmountInput extends StatelessWidget {
@@ -43,7 +43,7 @@ class AmountInput extends StatelessWidget {
             create: (_) => CurrencyCubit(CurrencyService())
               ..fetchCurrencies() // Fetch currencies when creating the cubit
               ..selectCurrency('USD'), // Set the initial currency
-            child: CurrencySelector(
+            child: GlobalCurrencySelector(
               initialCurrency: 'USD', // Example initial currency
               onCurrencyChanged: (newCurrency) {
                 // Handle currency change logic here

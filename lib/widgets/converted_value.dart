@@ -1,8 +1,10 @@
+import 'package:ccon/blocs/currency_cubit.dart';
+import 'package:ccon/services/currency_service.dart';
+import 'package:ccon/widgets/currency_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ccon/blocs/currency_cubit.dart';
+import 'package:ccon/blocs/global_currency_cubit.dart'; // Import the GlobalCurrencyCubit
 import 'package:ccon/blocs/amount_cubit.dart';
-import 'currency_selector.dart'; // Import the CurrencySelector widget
 
 class ConvertedValue extends StatelessWidget {
   const ConvertedValue({super.key});
@@ -19,13 +21,13 @@ class ConvertedValue extends StatelessWidget {
           amountText = 'Amount: ${amountState.amount}';
         }
 
-        return BlocBuilder<CurrencyCubit, CurrencyState>(
-          builder: (context, currencyState) {
+        return BlocBuilder<GlobalCurrencyCubit, GlobalCurrencyState>(
+          builder: (context, globalCurrencyState) {
             // Default currency display
-            String selectedCurrency = 'USD';
+            String globalSelectedCurrency = 'USD';
 
-            if (currencyState is CurrencyLoaded) {
-              selectedCurrency = currencyState.selectedCurrency ?? 'USD';
+            if (globalCurrencyState is GlobalCurrencyLoaded) {
+              globalSelectedCurrency = globalCurrencyState.selectedCurrency ?? 'USD';
             }
 
             return Row(
@@ -33,7 +35,7 @@ class ConvertedValue extends StatelessWidget {
               children: [
                 Expanded(
                   child: Text(
-                    '$amountText $selectedCurrency',
+                    '$amountText $globalSelectedCurrency',
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -42,14 +44,17 @@ class ConvertedValue extends StatelessWidget {
                 ),
                 SizedBox(width: 16), // Spacing between amount and currency selector
                 Expanded(
-                  child: CurrencySelector(
-                    initialCurrency: selectedCurrency,
-                    onCurrencyChanged: (newCurrency) {
-                      // Handle currency change
-                      context
-                          .read<CurrencyCubit>()
-                          .selectCurrency(newCurrency);
-                    },
+                  child: BlocProvider(
+                    create: (_) => CurrencyCubit(CurrencyService()) // Provide CurrencyCubit for local currency selection
+                      ..fetchCurrencies() // Fetch currencies when creating the cubit
+                      ..selectCurrency(globalSelectedCurrency), // Set the initial currency
+                    child: CurrencySelector(
+                      initialCurrency: globalSelectedCurrency,
+                      onCurrencyChanged: (newCurrency) {
+                        // Handle local currency change
+                        context.read<CurrencyCubit>().selectCurrency(newCurrency);
+                      },
+                    ),
                   ),
                 ),
               ],
