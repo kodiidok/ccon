@@ -4,7 +4,6 @@ import 'package:ccon/widgets/converted_values.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-
 class CurrencyExchangeScreen extends StatelessWidget {
   const CurrencyExchangeScreen({super.key});
 
@@ -41,7 +40,9 @@ class CurrencyExchangeScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 8),
-              ConvertedValues(), // This now uses the Cubit
+              Expanded(
+                child: ConvertedValues(), // This will fill remaining space
+              ),
             ],
           ),
         ),

@@ -1,30 +1,31 @@
-import 'package:ccon/blocs/amount_cubit.dart';
+import 'package:ccon/widgets/converted_value.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ConvertedValues extends StatelessWidget {
-  const ConvertedValues({Key? key}) : super(key: key);
+  const ConvertedValues({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AmountCubit, AmountState>(
-      builder: (context, state) {
-        String displayedAmount = 'Converted Values will be displayed here';
-
-        if (state is AmountUpdated) {
-          displayedAmount = 'Amount: ${state.amount}';
-        }
-
-        return Center(
-          child: Text(
-            displayedAmount,
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        );
-      },
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ConvertedValue(),
+          // // Example content
+          // Container(
+          //   height: 200, // Example fixed height, adjust as needed
+          //   color: Colors.red,
+          //   child: Center(child: Text('Some content')),
+          // ),
+          // SizedBox(height: 16),
+          // Container(
+          //   height: 200, // Example fixed height, adjust as needed
+          //   color: Colors.blue,
+          //   child: Center(child: Text('Some more content')),
+          // ),
+          // Add more widgets as needed
+        ],
+      ),
     );
   }
 }
