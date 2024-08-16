@@ -8,13 +8,17 @@ class CurrencyService {
 
   CurrencyService._internal();
 
-  Future<Map<String, double>> getLatestRates(String fromCurrency) async {
+  Future<double> getConversionRate(String fromCurrency, String toCurrency) async {
     final response = await http.get(
-        Uri.parse('https://api.frankfurter.app/latest?from=$fromCurrency'));
+      Uri.parse('https://api.frankfurter.app/latest?from=$fromCurrency'),
+    );
+    
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
-      return (data['rates'] as Map<String, dynamic>)
+      final rates = (data['rates'] as Map<String, dynamic>)
           .map((key, value) => MapEntry(key, value.toDouble()));
+
+      return rates[toCurrency] ?? 1.0; // Default to 1.0 if the currency is not found
     } else {
       throw Exception('Failed to load currency rates');
     }
