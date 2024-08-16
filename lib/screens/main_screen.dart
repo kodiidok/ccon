@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'converter_screen.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
@@ -13,13 +12,8 @@ class MainScreen extends StatelessWidget {
       body: Center(
         child: ElevatedButton(
           onPressed: () {
-            // Navigate to the ConverterScreen
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const ConverterScreen(),
-              ),
-            );
+            // Navigate to the Exchange Screen
+            Navigator.pushNamed(context, '/currency_exchange');
           },
           child: const Text('Go to Converter Screen'),
         ),

@@ -2,6 +2,12 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class CurrencyService {
+  static final CurrencyService _instance = CurrencyService._internal();
+
+  factory CurrencyService() => _instance;
+
+  CurrencyService._internal();
+
   Future<Map<String, double>> getLatestRates(String fromCurrency) async {
     final response = await http.get(
         Uri.parse('https://api.frankfurter.app/latest?from=$fromCurrency'));

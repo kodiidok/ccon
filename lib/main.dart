@@ -1,24 +1,28 @@
+import 'package:ccon/blocs/currency/currency_cubit.dart';
+import 'package:ccon/screens/currency_exchange_screen.dart';
 import 'package:ccon/screens/main_screen.dart';
+import 'package:ccon/services/currency_service.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ccon/bloc/currency/currency_bloc.dart';
-import 'package:ccon/services/currency_service.dart'; // Import your ConverterScreen
+import 'package:flutter_bloc/flutter_bloc.dart'; // Import the CurrencyService
 
-void main() {
-  runApp(const MyApp());
-}
+void main() => runApp(const CurrencyExchangeApp());
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class CurrencyExchangeApp extends StatelessWidget {
+  const CurrencyExchangeApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => CurrencyBloc(CurrencyService()),
-      child: const MaterialApp(
-        title: 'Currency Converter',
-        home: MainScreen(), // Your main screen
+    return MaterialApp(
+      home: BlocProvider(
+        create: (_) => CurrencyExchangeCubit(CurrencyService()),
+        child: const MainScreen(),
       ),
+      routes: {
+        '/currency_exchange': (context) => BlocProvider(
+              create: (_) => CurrencyExchangeCubit(CurrencyService()),
+              child: const CurrencyExchangeScreen(),
+            ),
+      },
     );
   }
 }
